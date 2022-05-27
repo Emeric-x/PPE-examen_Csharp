@@ -10,8 +10,8 @@ namespace G_B.mesClasses
 {
     public class Cvisiteur : Cemploye
     {
-        public Cvisiteur(string id, string nom, string prenom, string login, string mdp, string adresse, int cp, string ville, DateTime dateEmbauche, string mdp_hash)
-            : base(id, nom, prenom, login, mdp, adresse, cp, ville, dateEmbauche, mdp_hash)
+        public Cvisiteur(string id, string nom, string prenom, string login, string mdp, string adresse, int cp, string ville, DateTime dateEmbauche, string mdp_hash, char region)
+            : base(id, nom, prenom, login, mdp, adresse, cp, ville, dateEmbauche, mdp_hash, region)
         {
 
         }
@@ -85,6 +85,33 @@ namespace G_B.mesClasses
                 }
             }
             return null;
+        }
+
+        public char GetRegionVisitByName(string sFullName)
+        {
+            foreach (Cvisiteur oUnVisiteur in oListVisiteurs)
+            {
+                if ($"{oUnVisiteur.Nom} {oUnVisiteur.Prenom}".ToLower() == sFullName.ToLower())
+                {
+                    return oUnVisiteur.Region;
+                }
+            }
+            return Convert.ToChar("n"); //obligé de mettre un return ici + impo de return null donc j'ai mis ca meme si c inutile
+        }
+
+        public List<Cvisiteur> GetVisiteursByRegion(char sRegion)
+        {
+            List<Cvisiteur> oListRetour = new List<Cvisiteur>();
+
+            foreach(Cvisiteur oUnVisiteur in oListVisiteurs)
+            {
+                if(oUnVisiteur.Region == sRegion)
+                {
+                    oListRetour.Add(oUnVisiteur);
+                }
+            }
+
+            return oListRetour;
         }
     }
 }

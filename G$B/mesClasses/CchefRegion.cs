@@ -10,8 +10,8 @@ namespace G_B.mesClasses
 {
     public class CchefRegion : Cemploye
     {
-        public CchefRegion(string id, string nom, string prenom, string login, string mdp, string adresse, int cp, string ville, DateTime dateEmbauche, string mdp_hash)
-           : base(id, nom, prenom, login, mdp, adresse, cp, ville, dateEmbauche, mdp_hash)
+        public CchefRegion(string id, string nom, string prenom, string login, string mdp, string adresse, int cp, string ville, DateTime dateEmbauche, string mdp_hash, char region)
+           : base(id, nom, prenom, login, mdp, adresse, cp, ville, dateEmbauche, mdp_hash, region)
         {
 
         }

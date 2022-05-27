@@ -40,6 +40,8 @@
             this.Dashboard_LogoGSB = new System.Windows.Forms.PictureBox();
             this.Dashboard_lblTitle = new System.Windows.Forms.Label();
             this.Panel_form = new System.Windows.Forms.Panel();
+            this.Dashboard_ListMonths = new System.Windows.Forms.ComboBox();
+            this.Dashboard_lblChooseMonth = new System.Windows.Forms.Label();
             this.Dashboard_ValideNb = new System.Windows.Forms.Button();
             this.Dashboard_ValideForm = new System.Windows.Forms.Button();
             this.Dashboard_NumNbMedecin = new System.Windows.Forms.NumericUpDown();
@@ -190,6 +192,8 @@
             // Panel_form
             // 
             this.Panel_form.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            this.Panel_form.Controls.Add(this.Dashboard_ListMonths);
+            this.Panel_form.Controls.Add(this.Dashboard_lblChooseMonth);
             this.Panel_form.Controls.Add(this.Dashboard_ValideNb);
             this.Panel_form.Controls.Add(this.Dashboard_ValideForm);
             this.Panel_form.Controls.Add(this.Dashboard_NumNbMedecin);
@@ -201,6 +205,25 @@
             this.Panel_form.Size = new System.Drawing.Size(1280, 684);
             this.Panel_form.TabIndex = 2;
             this.Panel_form.Visible = false;
+            // 
+            // Dashboard_ListMonths
+            // 
+            this.Dashboard_ListMonths.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Dashboard_ListMonths.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Dashboard_ListMonths.Location = new System.Drawing.Point(720, 82);
+            this.Dashboard_ListMonths.Name = "Dashboard_ListMonths";
+            this.Dashboard_ListMonths.Size = new System.Drawing.Size(269, 24);
+            this.Dashboard_ListMonths.TabIndex = 11;
+            // 
+            // Dashboard_lblChooseMonth
+            // 
+            this.Dashboard_lblChooseMonth.AutoSize = true;
+            this.Dashboard_lblChooseMonth.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Dashboard_lblChooseMonth.Location = new System.Drawing.Point(314, 82);
+            this.Dashboard_lblChooseMonth.Name = "Dashboard_lblChooseMonth";
+            this.Dashboard_lblChooseMonth.Size = new System.Drawing.Size(262, 25);
+            this.Dashboard_lblChooseMonth.TabIndex = 10;
+            this.Dashboard_lblChooseMonth.Text = "Dashboard_lblChooseMonth";
             // 
             // Dashboard_ValideNb
             // 
@@ -306,5 +329,7 @@
         private System.Windows.Forms.NumericUpDown Dashboard_NumNbMedecin;
         private System.Windows.Forms.Button Dashboard_ValideForm;
         private System.Windows.Forms.Button Dashboard_ValideNb;
+        private System.Windows.Forms.Label Dashboard_lblChooseMonth;
+        private System.Windows.Forms.ComboBox Dashboard_ListMonths;
     }
 }

@@ -8,7 +8,7 @@ namespace G_B.mesClasses
 {
     public abstract class Cemploye
     {
-        protected Cemploye(string id, string nom, string prenom, string login, string mdp, string adresse, int cp, string ville, DateTime dateEmbauche, string mdp_hash)
+        protected Cemploye(string id, string nom, string prenom, string login, string mdp, string adresse, int cp, string ville, DateTime dateEmbauche, string mdp_hash, char region)
         {
             Id = id;
             Nom = nom;
@@ -20,6 +20,7 @@ namespace G_B.mesClasses
             Ville = ville;
             DateEmbauche = dateEmbauche;
             Mdp_hash = mdp_hash;
+            Region = region;
         }
 
         public string Id { get; set; }
@@ -32,5 +33,6 @@ namespace G_B.mesClasses
         public string Ville { get; set; }
         public DateTime DateEmbauche { get; set; }
         public string Mdp_hash { get; set; }
+        public char Region { get; set; }
     }
 }
