@@ -75,6 +75,7 @@ namespace G_B
             Dashboard_lblNbMedecin.Text = "Choisir le nombre de médecin à visiter";
             Dashboard_ValideForm.Text = "Valider";
             Dashboard_ValideNb.Text = "Confirmer";
+            Dashboard_lblChooseMonth.Text = "Choisir un mois";
             Dashboard_lblTitreTabVisiteurs.Text = $"Données concernant les visiteurs de votre région, pour le mois de {DateTime.Now.ToString("MMMM", new CultureInfo("fr-FR"))}";
         }
 
