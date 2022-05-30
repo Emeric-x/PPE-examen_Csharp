@@ -95,7 +95,7 @@ namespace G_B.mesClasses
             return Result;
         }
 
-        public int GetNbMedecinVisiteByIdVisit(string sIdVisiteur)
+        public int GetNbMedecinVisiteByIdVisitAndMonth(string sIdVisiteur)
         {
             int nbMedecinVisite = 0;
             string AnneeMois = DateTime.Now.ToString("yyyyM");

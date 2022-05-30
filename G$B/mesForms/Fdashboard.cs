@@ -23,6 +23,8 @@ namespace G_B
         private Cmedecins omedecins = Cmedecins.getInstance();
         private Cmedicaments omedicaments = Cmedicaments.getInstance();
         private Cpresenters opresenters = Cpresenters.getInstance();
+        private CligneFFs oligneFFs = CligneFFs.getInstance();
+        private CligneFHFs oligneFHFs = CligneFHFs.getInstance();
 
         public Fdashboard()
         {
@@ -155,26 +157,26 @@ namespace G_B
                 oLabelPrenom.Font = new Font("Microsoft Sans Serif", 10);
 
                 Label oLabelMed = new Label();
-                oLabelMed.Text = $"{opresenters.GetNbMedecinVisiteByIdVisit(unVisiteur.Id)}";
+                oLabelMed.Text = $"{opresenters.GetNbMedecinVisiteByIdVisitAndMonth(unVisiteur.Id)}";
                 oLabelMed.Name = $"lblMedVisit_{unVisiteur.Nom}";
                 oLabelMed.AutoSize = true;
                 oLabelMed.Font = new Font("Microsoft Sans Serif", 10);
 
                 Label oLabelFF = new Label();
-                oLabelFF.Text = "Frais Forfaits";
-                oLabelFF.Name = "Dashboard_lblTabVisFF";
+                oLabelFF.Text = $"{oligneFFs.GetTotalFFByIdVisitAndMonth(unVisiteur.Id)}";
+                oLabelFF.Name = $"lblFF_{unVisiteur.Nom}";
                 oLabelFF.AutoSize = true;
                 oLabelFF.Font = new Font("Microsoft Sans Serif", 10);
 
                 Label oLabelFHF = new Label();
-                oLabelFHF.Text = "Frais Hors Forfaits";
-                oLabelFHF.Name = "Dashboard_lblTabVisFHF";
+                oLabelFHF.Text = $"{oligneFHFs.GetTotalFHFByIdVisitAndMonth(unVisiteur.Id)}";
+                oLabelFHF.Name = $"lblFHF_{unVisiteur.Nom}";
                 oLabelFHF.AutoSize = true;
                 oLabelFHF.Font = new Font("Microsoft Sans Serif", 10);
 
                 Label oLabelCompteRendu = new Label();
-                oLabelCompteRendu.Text = "Compte Rendu Déposé";
-                oLabelCompteRendu.Name = "Dashboard_lblTabVisCompteRendu";
+                oLabelCompteRendu.Text = "Non";
+                oLabelCompteRendu.Name = $"lblCompteRendu_{unVisiteur.Nom}";
                 oLabelCompteRendu.AutoSize = true;
                 oLabelCompteRendu.Font = new Font("Microsoft Sans Serif", 10);
 

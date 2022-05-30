@@ -69,5 +69,22 @@ namespace G_B.mesClasses
                 return Instance;
             }
         }
+
+        public double GetTotalFFByIdVisitAndMonth(string sIdVisiteur)
+        {
+            double totalFF = 0;
+            string AnneeMois = DateTime.Now.ToString("yyyyM");
+            CfraisForfaits ofraisForfait = CfraisForfaits.getInstance();
+
+            foreach (CligneFF uneLigneFF in oListLigneFFs)
+            {
+                if(uneLigneFF.IdVisiteur == sIdVisiteur && uneLigneFF.Mois == AnneeMois)
+                {
+                    totalFF += uneLigneFF.Quantite * ofraisForfait.GetMontantByIdFraisForfait(uneLigneFF.IdFraisForfait);
+                }
+            }
+
+            return totalFF;
+        }
     }
 }
