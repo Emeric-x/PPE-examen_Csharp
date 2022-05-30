@@ -68,6 +68,9 @@
     <Compile Include="mesClasses\Carduino.cs" />
     <Compile Include="mesClasses\CchefRegion.cs" />
     <Compile Include="mesClasses\Cemploye.cs" />
+    <Compile Include="mesClasses\CfraisForfait.cs" />
+    <Compile Include="mesClasses\CligneFF.cs" />
+    <Compile Include="mesClasses\CligneFHF.cs" />
     <Compile Include="mesClasses\Cmedecin.cs" />
     <Compile Include="mesClasses\Cmedicament.cs" />
     <Compile Include="mesClasses\Cpresenter.cs" />

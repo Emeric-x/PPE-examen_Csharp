@@ -75,7 +75,7 @@ namespace G_B.mesClasses
         public double GetTotalFHFByIdVisitAndMonth(string sIdVisiteur)
         {
             double totalFHF = 0;
-            string AnneeMois = DateTime.Now.ToString("yyyyM");
+            string AnneeMois = Fdashboard.GetCurrentAnneeMois();
 
             foreach (CligneFHF uneLigneFHF in oListLigneFHFs)
             {

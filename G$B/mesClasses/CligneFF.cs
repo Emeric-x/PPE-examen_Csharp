@@ -73,7 +73,7 @@ namespace G_B.mesClasses
         public double GetTotalFFByIdVisitAndMonth(string sIdVisiteur)
         {
             double totalFF = 0;
-            string AnneeMois = DateTime.Now.ToString("yyyyM");
+            string AnneeMois = Fdashboard.GetCurrentAnneeMois();
             CfraisForfaits ofraisForfait = CfraisForfaits.getInstance();
 
             foreach (CligneFF uneLigneFF in oListLigneFFs)

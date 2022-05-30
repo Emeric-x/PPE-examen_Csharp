@@ -98,9 +98,9 @@ namespace G_B.mesClasses
         public int GetNbMedecinVisiteByIdVisitAndMonth(string sIdVisiteur)
         {
             int nbMedecinVisite = 0;
-            string AnneeMois = DateTime.Now.ToString("yyyyM");
+            string AnneeMois = Fdashboard.GetCurrentAnneeMois();
 
-            foreach(Cpresenter unPresenter in oListPresenters)
+            foreach (Cpresenter unPresenter in oListPresenters)
             {
                 if(unPresenter.Id_visit == sIdVisiteur && unPresenter.AnneeMois == AnneeMois && unPresenter.IsVisite)
                 {

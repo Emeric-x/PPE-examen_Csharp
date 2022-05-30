@@ -25,14 +25,13 @@ namespace G_B
         private Cpresenters opresenters = Cpresenters.getInstance();
         private CligneFFs oligneFFs = CligneFFs.getInstance();
         private CligneFHFs oligneFHFs = CligneFHFs.getInstance();
+        private List<Cvisiteur> oListVisiteurs = null;
 
         public Fdashboard()
         {
             InitializeComponent();
 
             InitializeText();
-            
-            InitTabVisiteursAccueil();
 
             //Liste des mois
             Dashboard_ListMonths.Items.Add("Janvier");
@@ -50,11 +49,15 @@ namespace G_B
 
             //Liste des visiteurs
             Cvisiteurs ovisiteurs = Cvisiteurs.getInstance();
-            List<Cvisiteur> oListVisiteurs = ovisiteurs.GetVisiteursByRegion(Fconnexion.oCurrentChefRegion.Region);
+            oListVisiteurs = ovisiteurs.GetVisiteursByRegion(Fconnexion.oCurrentChefRegion.Region);
             foreach (Cvisiteur oUnVisiteur in oListVisiteurs)
             {
                 Dashboard_ListVisiteur.Items.Add($"{oUnVisiteur.Nom} {oUnVisiteur.Prenom}");
             }
+
+            InitTabVisiteursAccueil();
+
+            FillTabVisiteurs();
         }
 
         private void InitializeText()
@@ -72,7 +75,7 @@ namespace G_B
             Dashboard_lblNbMedecin.Text = "Choisir le nombre de médecin à visiter";
             Dashboard_ValideForm.Text = "Valider";
             Dashboard_ValideNb.Text = "Confirmer";
-            Dashboard_lblTitreTabVisiteurs.Text = $"Données concernant la région {Fconnexion.oCurrentChefRegion.Region} pour le mois de {DateTime.Now.ToString("MMMM", new CultureInfo("fr-FR"))}";
+            Dashboard_lblTitreTabVisiteurs.Text = $"Données concernant les visiteurs de votre région, pour le mois de {DateTime.Now.ToString("MMMM", new CultureInfo("fr-FR"))}";
         }
 
         private void InitTabVisiteursAccueil()
@@ -85,6 +88,7 @@ namespace G_B
             TabVisiteurs.AutoSize = true;
             TabVisiteurs.CellBorderStyle = TableLayoutPanelCellBorderStyle.Single;
             TabVisiteurs.ColumnCount = 6;
+            TabVisiteurs.RowCount = oListVisiteurs.Count() + 1;
 
             SetHeaderTabVisiteurs();
 
@@ -139,9 +143,9 @@ namespace G_B
 
         private void FillTabVisiteurs()
         {
-            int i = 0;
+            int i = 1;
 
-            foreach(Cvisiteur unVisiteur in ovisiteurs.oListVisiteurs)
+            foreach(Cvisiteur unVisiteur in oListVisiteurs)
             {
                 // obligé de créer un label car Add prend uniquement un Control en paramètre
                 Label oLabelNom = new Label();
@@ -417,5 +421,22 @@ namespace G_B
 
             return true;
         }
+
+
+
+        #region Fonctions utiles
+
+        public static string GetCurrentAnneeMois()
+        {
+            string Annee = DateTime.Now.ToString("yyyy");
+            string mois = DateTime.Now.ToString("MM");
+            string AnneeMois = "";
+
+            AnneeMois = $"{Annee}{mois}";
+
+            return AnneeMois;
+        }
+
+        #endregion
     }
 }
