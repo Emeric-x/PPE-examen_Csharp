@@ -70,6 +70,7 @@
     <Compile Include="mesClasses\Cemploye.cs" />
     <Compile Include="mesClasses\Cmedecin.cs" />
     <Compile Include="mesClasses\Cmedicament.cs" />
+    <Compile Include="mesClasses\Cpresenter.cs" />
     <Compile Include="mesClasses\Cvisiteur.cs" />
     <Compile Include="mesForms\Fconnexion.cs">
       <SubType>Form</SubType>

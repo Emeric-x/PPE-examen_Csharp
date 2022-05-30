@@ -48,12 +48,15 @@
             this.Dashboard_lblNbMedecin = new System.Windows.Forms.Label();
             this.Dashboard_ListVisiteur = new System.Windows.Forms.ComboBox();
             this.Dashboard_lblChooseVisit = new System.Windows.Forms.Label();
+            this.Panel_Accueil = new System.Windows.Forms.Panel();
+            this.Dashboard_lblTitreTabVisiteurs = new System.Windows.Forms.Label();
             this.Dashboard_menu.SuspendLayout();
             this.Dashboard_profil.SuspendLayout();
             this.Dashboard_enTete.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Dashboard_LogoGSB)).BeginInit();
             this.Panel_form.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Dashboard_NumNbMedecin)).BeginInit();
+            this.Panel_Accueil.SuspendLayout();
             this.SuspendLayout();
             // 
             // Dashboard_menu
@@ -191,7 +194,7 @@
             // 
             // Panel_form
             // 
-            this.Panel_form.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            this.Panel_form.BackColor = System.Drawing.Color.SlateGray;
             this.Panel_form.Controls.Add(this.Dashboard_ListMonths);
             this.Panel_form.Controls.Add(this.Dashboard_lblChooseMonth);
             this.Panel_form.Controls.Add(this.Dashboard_ValideNb);
@@ -284,11 +287,32 @@
             this.Dashboard_lblChooseVisit.TabIndex = 0;
             this.Dashboard_lblChooseVisit.Text = "Dashboard_lblChooseVisit";
             // 
+            // Panel_Accueil
+            // 
+            this.Panel_Accueil.AutoScroll = true;
+            this.Panel_Accueil.BackColor = System.Drawing.Color.SlateGray;
+            this.Panel_Accueil.Controls.Add(this.Dashboard_lblTitreTabVisiteurs);
+            this.Panel_Accueil.Location = new System.Drawing.Point(199, 83);
+            this.Panel_Accueil.Name = "Panel_Accueil";
+            this.Panel_Accueil.Size = new System.Drawing.Size(1280, 684);
+            this.Panel_Accueil.TabIndex = 1;
+            // 
+            // Dashboard_lblTitreTabVisiteurs
+            // 
+            this.Dashboard_lblTitreTabVisiteurs.AutoSize = true;
+            this.Dashboard_lblTitreTabVisiteurs.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Dashboard_lblTitreTabVisiteurs.Location = new System.Drawing.Point(138, 68);
+            this.Dashboard_lblTitreTabVisiteurs.Name = "Dashboard_lblTitreTabVisiteurs";
+            this.Dashboard_lblTitreTabVisiteurs.Size = new System.Drawing.Size(344, 26);
+            this.Dashboard_lblTitreTabVisiteurs.TabIndex = 0;
+            this.Dashboard_lblTitreTabVisiteurs.Text = "Dashboard_lblTitreTabVisiteurs";
+            // 
             // Fdashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1479, 768);
+            this.Controls.Add(this.Panel_Accueil);
             this.Controls.Add(this.Panel_form);
             this.Controls.Add(this.Dashboard_enTete);
             this.Controls.Add(this.Dashboard_menu);
@@ -305,6 +329,8 @@
             this.Panel_form.ResumeLayout(false);
             this.Panel_form.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Dashboard_NumNbMedecin)).EndInit();
+            this.Panel_Accueil.ResumeLayout(false);
+            this.Panel_Accueil.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -331,5 +357,7 @@
         private System.Windows.Forms.Button Dashboard_ValideNb;
         private System.Windows.Forms.Label Dashboard_lblChooseMonth;
         private System.Windows.Forms.ComboBox Dashboard_ListMonths;
+        private System.Windows.Forms.Panel Panel_Accueil;
+        private System.Windows.Forms.Label Dashboard_lblTitreTabVisiteurs;
     }
 }

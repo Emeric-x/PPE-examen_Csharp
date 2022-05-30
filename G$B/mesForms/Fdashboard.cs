@@ -9,25 +9,28 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Text.Json;
 using G_B.mesClasses;
-using System.Net.Http;
+using System.Globalization;
 
 namespace G_B
 {
     public partial class Fdashboard : Form
     {
         private TableLayoutPanel oTabMed = null;
+        private TableLayoutPanel TabVisiteurs = null;
         private List<ComboBox> oListChoosedMedecins = new List<ComboBox>();
         private List<CheckedListBox> oListChoosedMedicaments = new List<CheckedListBox>();
         private Cvisiteurs ovisiteurs = Cvisiteurs.getInstance();
-        private CchefRegions ochefRegions = CchefRegions.getInstance();
         private Cmedecins omedecins = Cmedecins.getInstance();
         private Cmedicaments omedicaments = Cmedicaments.getInstance();
+        private Cpresenters opresenters = Cpresenters.getInstance();
 
         public Fdashboard()
         {
             InitializeComponent();
 
             InitializeText();
+            
+            InitTabVisiteursAccueil();
 
             //Liste des mois
             Dashboard_ListMonths.Items.Add("Janvier");
@@ -67,6 +70,123 @@ namespace G_B
             Dashboard_lblNbMedecin.Text = "Choisir le nombre de médecin à visiter";
             Dashboard_ValideForm.Text = "Valider";
             Dashboard_ValideNb.Text = "Confirmer";
+            Dashboard_lblTitreTabVisiteurs.Text = $"Données concernant la région {Fconnexion.oCurrentChefRegion.Region} pour le mois de {DateTime.Now.ToString("MMMM", new CultureInfo("fr-FR"))}";
+        }
+
+        private void InitTabVisiteursAccueil()
+        {
+            TabVisiteurs = new TableLayoutPanel();
+            TabVisiteurs.Visible = true;
+            TabVisiteurs.Parent = Panel_Accueil;
+            TabVisiteurs.BackColor = Color.White;
+            TabVisiteurs.Name = "Dahsboard_TabVisiteurs";
+            TabVisiteurs.AutoSize = true;
+            TabVisiteurs.CellBorderStyle = TableLayoutPanelCellBorderStyle.Single;
+            TabVisiteurs.ColumnCount = 6;
+
+            SetHeaderTabVisiteurs();
+
+            TabVisiteurs.Location = new Point((Panel_Accueil.Width - TabVisiteurs.Width) / 2, (Panel_Accueil.Height - TabVisiteurs.Height) / 2);
+        }
+
+        private void SetHeaderTabVisiteurs()
+        {
+            Label oLabelNom = new Label();
+            oLabelNom.Text = "Nom";
+            oLabelNom.Name = "Dashboard_lblTabVisNom";
+            oLabelNom.AutoSize = true;
+            oLabelNom.Font = new Font("Microsoft Sans Serif", 12, FontStyle.Bold);
+
+            Label oLabelPrenom = new Label();
+            oLabelPrenom.Text = "Prénom";
+            oLabelPrenom.Name = "Dashboard_lblTabVisPrenom";
+            oLabelPrenom.AutoSize = true;
+            oLabelPrenom.Font = new Font("Microsoft Sans Serif", 12, FontStyle.Bold);
+
+            Label oLabelMed = new Label();
+            oLabelMed.Text = "Médecins visités";
+            oLabelMed.Name = "Dashboard_lblTabVisMed";
+            oLabelMed.AutoSize = true;
+            oLabelMed.Font = new Font("Microsoft Sans Serif", 12, FontStyle.Bold);
+
+            Label oLabelFF = new Label();
+            oLabelFF.Text = "Frais Forfaits";
+            oLabelFF.Name = "Dashboard_lblTabVisFF";
+            oLabelFF.AutoSize = true;
+            oLabelFF.Font = new Font("Microsoft Sans Serif", 12, FontStyle.Bold);
+
+            Label oLabelFHF = new Label();
+            oLabelFHF.Text = "Frais Hors Forfaits";
+            oLabelFHF.Name = "Dashboard_lblTabVisFHF";
+            oLabelFHF.AutoSize = true;
+            oLabelFHF.Font = new Font("Microsoft Sans Serif", 12, FontStyle.Bold);
+
+            Label oLabelCompteRendu = new Label();
+            oLabelCompteRendu.Text = "Compte Rendu Déposé";
+            oLabelCompteRendu.Name = "Dashboard_lblTabVisCompteRendu";
+            oLabelCompteRendu.AutoSize = true;
+            oLabelCompteRendu.Font = new Font("Microsoft Sans Serif", 12, FontStyle.Bold);
+
+            TabVisiteurs.Controls.Add(oLabelNom, 0, 0);
+            TabVisiteurs.Controls.Add(oLabelPrenom, 1, 0);
+            TabVisiteurs.Controls.Add(oLabelMed, 2, 0);
+            TabVisiteurs.Controls.Add(oLabelFF, 3, 0);
+            TabVisiteurs.Controls.Add(oLabelFHF, 4, 0);
+            TabVisiteurs.Controls.Add(oLabelCompteRendu, 5, 0);
+        }
+
+        private void FillTabVisiteurs()
+        {
+            int i = 0;
+
+            foreach(Cvisiteur unVisiteur in ovisiteurs.oListVisiteurs)
+            {
+                // obligé de créer un label car Add prend uniquement un Control en paramètre
+                Label oLabelNom = new Label();
+                oLabelNom.Text = $"{unVisiteur.Nom}";
+                oLabelNom.Name = $"{unVisiteur.Nom}";
+                oLabelNom.AutoSize = true;
+                oLabelNom.Font = new Font("Microsoft Sans Serif", 10);
+
+                Label oLabelPrenom = new Label();
+                oLabelPrenom.Text = $"{unVisiteur.Prenom}";
+                oLabelPrenom.Name = $"{unVisiteur.Prenom}";
+                oLabelPrenom.AutoSize = true;
+                oLabelPrenom.Font = new Font("Microsoft Sans Serif", 10);
+
+                Label oLabelMed = new Label();
+                oLabelMed.Text = $"{opresenters.GetNbMedecinVisiteByIdVisit(unVisiteur.Id)}";
+                oLabelMed.Name = $"lblMedVisit_{unVisiteur.Nom}";
+                oLabelMed.AutoSize = true;
+                oLabelMed.Font = new Font("Microsoft Sans Serif", 10);
+
+                Label oLabelFF = new Label();
+                oLabelFF.Text = "Frais Forfaits";
+                oLabelFF.Name = "Dashboard_lblTabVisFF";
+                oLabelFF.AutoSize = true;
+                oLabelFF.Font = new Font("Microsoft Sans Serif", 10);
+
+                Label oLabelFHF = new Label();
+                oLabelFHF.Text = "Frais Hors Forfaits";
+                oLabelFHF.Name = "Dashboard_lblTabVisFHF";
+                oLabelFHF.AutoSize = true;
+                oLabelFHF.Font = new Font("Microsoft Sans Serif", 10);
+
+                Label oLabelCompteRendu = new Label();
+                oLabelCompteRendu.Text = "Compte Rendu Déposé";
+                oLabelCompteRendu.Name = "Dashboard_lblTabVisCompteRendu";
+                oLabelCompteRendu.AutoSize = true;
+                oLabelCompteRendu.Font = new Font("Microsoft Sans Serif", 10);
+
+                TabVisiteurs.Controls.Add(oLabelNom, 0, i);
+                TabVisiteurs.Controls.Add(oLabelPrenom, 1, i);
+                TabVisiteurs.Controls.Add(oLabelMed, 2, i);
+                TabVisiteurs.Controls.Add(oLabelFF, 3, i);
+                TabVisiteurs.Controls.Add(oLabelFHF, 4, i);
+                TabVisiteurs.Controls.Add(oLabelCompteRendu, 5, i);
+
+                i++;
+            }
         }
 
         #region Events Hover Btn
@@ -109,12 +229,14 @@ namespace G_B
         {
             Dashboard_lblTitle.Text = "Formulaire";
             Panel_form.Visible = true;
+            Panel_Accueil.Visible = false;
         }
 
         private void Dashboard_btnAcceuil_Click(object sender, EventArgs e)
         {
             Dashboard_lblTitle.Text = "Accueil";
             Panel_form.Visible = false;
+            Panel_Accueil.Visible = true;
         }
 
         private void Dashboard_btnLogout_Click(object sender, EventArgs e)
@@ -250,7 +372,7 @@ namespace G_B
                         if (oListChoosedMedicaments[i].GetItemChecked(j) == true)
                         {
                             string idMedicament = omedicaments.GetIdMedByName(oListChoosedMedicaments[i].Items[j].ToString());
-                            AjoutPresenter(idMedicament, idVisiteur, idMedecin, ChoosedMonth);
+                            opresenters.AjoutPresenter(idMedicament, idVisiteur, idMedecin, ChoosedMonth);
                         }
                     }
                 }
@@ -292,29 +414,6 @@ namespace G_B
             }
 
             return true;
-        }
-
-        public string AjoutPresenter(string sId_med, string sId_visit, int sId_medecin, string ChoosedMonth)
-        {
-            string Result = null;
-
-            HttpClient client = new HttpClient();
-            string url = $"http://localhost:59906/api/medicament/CreatePresenter/{sId_med}/{sId_visit}/{sId_medecin}/{ChoosedMonth}";
-            var responsetask = client.GetAsync(url);
-            responsetask.Wait();
-
-            if (responsetask.IsCompleted)
-            {
-                var result = responsetask.Result;
-                if (result.IsSuccessStatusCode)
-                {
-                    var message = result.Content.ReadAsStringAsync();
-                    message.Wait();
-                    Result = message.Result;
-                }
-            }
-
-            return Result;
         }
     }
 }
