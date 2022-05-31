@@ -53,8 +53,8 @@ namespace G_B
             Login = Login_tbLogin.Text;
             Password = Login_tbPwd.Text;
 
-            CchefRegions oChefRegion = CchefRegions.getInstance();
-            ChefRegionJson = oChefRegion.VerifInfoConnexion(Login, Password); // récupère l'objet en string
+            CchefRegions oChefRegions = CchefRegions.getInstance();
+            ChefRegionJson = oChefRegions.VerifInfoConnexion(Login, Password); // récupère l'objet en string
 
             if (ChefRegionJson != null)
             {

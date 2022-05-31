@@ -26,6 +26,7 @@ namespace G_B
         private CligneFFs oligneFFs = CligneFFs.getInstance();
         private CligneFHFs oligneFHFs = CligneFHFs.getInstance();
         private List<Cvisiteur> oListVisiteurs = null;
+        private CcompteRendus ocompterendus = CcompteRendus.getInstance();
 
         public Fdashboard()
         {
@@ -180,7 +181,7 @@ namespace G_B
                 oLabelFHF.Font = new Font("Microsoft Sans Serif", 10);
 
                 Label oLabelCompteRendu = new Label();
-                oLabelCompteRendu.Text = "Non";
+                oLabelCompteRendu.Text = $"{ocompterendus.isCompteRenduDepose(unVisiteur.Id)}";
                 oLabelCompteRendu.Name = $"lblCompteRendu_{unVisiteur.Nom}";
                 oLabelCompteRendu.AutoSize = true;
                 oLabelCompteRendu.Font = new Font("Microsoft Sans Serif", 10);
@@ -269,6 +270,7 @@ namespace G_B
             {
                 oTabMed.Controls.Clear();
                 oTabMed.RowStyles.Clear();
+                oTabMed.Width = 0; // pour éviter les problèmes de taille lorsqu'on passe d'un grand à un plus petit tableau
             }
 
             if (NbMedecins > 0)
@@ -277,7 +279,6 @@ namespace G_B
                 oTabMed.Visible = true;
                 oTabMed.CellBorderStyle = TableLayoutPanelCellBorderStyle.InsetDouble;
                 oTabMed.AutoSize = true;
-                oTabMed.Location = new Point(250, 270);
                 oTabMed.RowCount = 3;
                 oTabMed.ColumnCount = NbMedecins + 1; // +1 pour laisser une première colonne pour les lbl
 
@@ -295,8 +296,9 @@ namespace G_B
                     // Ajout liste medicaments
                     AddListMedicamentsTab(i);
                 }
-                
+
                 Panel_form.Controls.Add(oTabMed);
+                oTabMed.Location = new Point((Panel_form.Width - oTabMed.Width) / 2, 270); //après avoir ajouté le tableau au panel, pour que width soit bien pris en compte
             }
             else
             {

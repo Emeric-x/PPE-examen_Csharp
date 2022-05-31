@@ -67,6 +67,7 @@
   <ItemGroup>
     <Compile Include="mesClasses\Carduino.cs" />
     <Compile Include="mesClasses\CchefRegion.cs" />
+    <Compile Include="mesClasses\CcompteRendu.cs" />
     <Compile Include="mesClasses\Cemploye.cs" />
     <Compile Include="mesClasses\CfraisForfait.cs" />
     <Compile Include="mesClasses\CligneFF.cs" />
