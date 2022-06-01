@@ -70,16 +70,16 @@ namespace G_B.mesClasses
             }
         }
 
-        public string isCompteRenduDepose(string sIdVisiteur)
+        public bool isCompteRenduDepose(string sIdVisiteur)
         {
-            string isDepose = "Non";
+            bool isDepose = false;
             string AnneeMois = Fdashboard.GetCurrentAnneeMois();
 
             foreach (CcompteRendu oUnCompteRendu in oListCompteRendus)
             {
                 if(oUnCompteRendu.Id_visit == sIdVisiteur && oUnCompteRendu.AnneeMois == AnneeMois)
                 {
-                    isDepose = "Oui";
+                    isDepose = true;
                 }
             }
 

@@ -80,6 +80,42 @@ namespace G_B
             Dashboard_lblTitreTabVisiteurs.Text = $"Données concernant les visiteurs de votre région, pour le mois de {DateTime.Now.ToString("MMMM", new CultureInfo("fr-FR"))}";
         }
 
+        #region Events Hover Btn
+
+        private void Dashboard_btnAcceuil_MouseHover(object sender, EventArgs e)
+        {
+            Dashboard_btnAcceuil.ForeColor = Color.Blue;
+        }
+
+        private void Dashboard_btnAcceuil_MouseLeave(object sender, EventArgs e)
+        {
+            Dashboard_btnAcceuil.ForeColor = Color.DeepSkyBlue;
+        }
+
+        private void Dashboard_btnComptes_MouseHover(object sender, EventArgs e)
+        {
+            Dashboard_btnForm.ForeColor = Color.Blue;
+        }
+
+        private void Dashboard_btnComptes_MouseLeave(object sender, EventArgs e)
+        {
+            Dashboard_btnForm.ForeColor = Color.DeepSkyBlue;
+        }
+
+        private void Dashboard_btnLogout_MouseHover(object sender, EventArgs e)
+        {
+            Dashboard_btnLogout.ForeColor = Color.Black;
+            Dashboard_btnLogout.BackColor = Color.Blue;
+        }
+
+        private void Dashboard_btnLogout_MouseLeave(object sender, EventArgs e)
+        {
+            Dashboard_btnLogout.ForeColor = Color.White;
+            Dashboard_btnLogout.BackColor = Color.DeepSkyBlue;
+        }
+
+        #endregion
+
         private void InitTabVisiteursAccueil()
         {
             TabVisiteurs = new TableLayoutPanel();
@@ -180,11 +216,24 @@ namespace G_B
                 oLabelFHF.AutoSize = true;
                 oLabelFHF.Font = new Font("Microsoft Sans Serif", 10);
 
-                Label oLabelCompteRendu = new Label();
-                oLabelCompteRendu.Text = $"{ocompterendus.isCompteRenduDepose(unVisiteur.Id)}";
+                LinkLabel oLabelCompteRendu = new LinkLabel();
                 oLabelCompteRendu.Name = $"lblCompteRendu_{unVisiteur.Nom}";
                 oLabelCompteRendu.AutoSize = true;
                 oLabelCompteRendu.Font = new Font("Microsoft Sans Serif", 10);
+                if (ocompterendus.isCompteRenduDepose(unVisiteur.Id))
+                {
+                    string link = "http://localhost/akagami/Github/PPE_finAnnee_BTS/PPE-examen_PHP/";
+                    oLabelCompteRendu.LinkArea = new LinkArea(0, 2);
+                    oLabelCompteRendu.Links.Add(0, link.Length, link);
+                    oLabelCompteRendu.Click += oLabelCompteRendu_Click;
+                    oLabelCompteRendu.Text = "Oui";
+                }
+                else
+                {
+                    oLabelCompteRendu.LinkBehavior = LinkBehavior.NeverUnderline;
+                    oLabelCompteRendu.LinkColor = Color.Black;
+                    oLabelCompteRendu.Text = "Non";
+                }
 
                 TabVisiteurs.Controls.Add(oLabelNom, 0, i);
                 TabVisiteurs.Controls.Add(oLabelPrenom, 1, i);
@@ -197,41 +246,11 @@ namespace G_B
             }
         }
 
-        #region Events Hover Btn
-
-        private void Dashboard_btnAcceuil_MouseHover(object sender, EventArgs e)
+        private void oLabelCompteRendu_Click(object sender, EventArgs e)
         {
-            Dashboard_btnAcceuil.ForeColor = Color.Blue;
+            //sender.LinkVisited = true;
+            System.Diagnostics.Process.Start("http://localhost/akagami/Github/PPE_finAnnee_BTS/PPE-examen_PHP/");
         }
-
-        private void Dashboard_btnAcceuil_MouseLeave(object sender, EventArgs e)
-        {
-            Dashboard_btnAcceuil.ForeColor = Color.DeepSkyBlue;
-        }
-
-        private void Dashboard_btnComptes_MouseHover(object sender, EventArgs e)
-        {
-            Dashboard_btnForm.ForeColor = Color.Blue;
-        }
-
-        private void Dashboard_btnComptes_MouseLeave(object sender, EventArgs e)
-        {
-            Dashboard_btnForm.ForeColor = Color.DeepSkyBlue;
-        }
-
-        private void Dashboard_btnLogout_MouseHover(object sender, EventArgs e)
-        {
-            Dashboard_btnLogout.ForeColor = Color.Black;
-            Dashboard_btnLogout.BackColor = Color.Blue;
-        }
-
-        private void Dashboard_btnLogout_MouseLeave(object sender, EventArgs e)
-        {
-            Dashboard_btnLogout.ForeColor = Color.White;
-            Dashboard_btnLogout.BackColor = Color.DeepSkyBlue;
-        }
-
-        #endregion
 
         private void Dashboard_btnForm_Click(object sender, EventArgs e)
         {
