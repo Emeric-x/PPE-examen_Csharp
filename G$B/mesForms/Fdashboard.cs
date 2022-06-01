@@ -227,7 +227,7 @@ namespace G_B
                     oLabelCompteRendu.LinkArea = new LinkArea(0, 3);
                     oLabelCompteRendu.Click += (sender, EventArgs) =>
                     {
-                        oLabelCompteRendu_Click(sender, EventArgs, link, ref oLabelCompteRendu); //override de l'event click (pour le linklabel)
+                        oLabelCompteRendu_Click(sender, EventArgs, link, oLabelCompteRendu); //override de l'event click (pour le linklabel)
                     };
                     oLabelCompteRendu.Text = "Oui";
                 }
@@ -249,7 +249,7 @@ namespace G_B
             }
         }
 
-        private void oLabelCompteRendu_Click(object sender, EventArgs e, string sLink, ref LinkLabel soLabelCompteRendu)
+        private void oLabelCompteRendu_Click(object sender, EventArgs e, string sLink, LinkLabel soLabelCompteRendu)
         {
             soLabelCompteRendu.LinkVisited = true;
             System.Diagnostics.Process.Start(sLink);
@@ -406,6 +406,8 @@ namespace G_B
                             opresenters.AjoutPresenter(idMedicament, idVisiteur, idMedecin, ChoosedMonth);
                         }
                     }
+
+                    i++;
                 }
 
                 MessageBox.Show("Validé !");
