@@ -27,6 +27,7 @@ namespace G_B
         private CligneFHFs oligneFHFs = CligneFHFs.getInstance();
         private List<Cvisiteur> oListVisiteurs = null;
         private CcompteRendus ocompterendus = CcompteRendus.getInstance();
+        private string link = "";
 
         public Fdashboard()
         {
@@ -220,11 +221,11 @@ namespace G_B
                 oLabelCompteRendu.Name = $"lblCompteRendu_{unVisiteur.Nom}";
                 oLabelCompteRendu.AutoSize = true;
                 oLabelCompteRendu.Font = new Font("Microsoft Sans Serif", 10);
+                link = $"http://localhost/akagami/Github/PPE_finAnnee_BTS/PPE-examen_PHP/download_compteRendu.php?loginChef={Fconnexion.oCurrentChefRegion.Login}&mdpChef={Fconnexion.oCurrentChefRegion.Mdp}&idVisit={unVisiteur.Id}";
+                oLabelCompteRendu.Links.Add(0, link.Length, link);
                 if (ocompterendus.isCompteRenduDepose(unVisiteur.Id))
                 {
-                    string link = "http://localhost/akagami/Github/PPE_finAnnee_BTS/PPE-examen_PHP/";
-                    oLabelCompteRendu.LinkArea = new LinkArea(0, 2);
-                    oLabelCompteRendu.Links.Add(0, link.Length, link);
+                    oLabelCompteRendu.LinkArea = new LinkArea(0, 3);
                     oLabelCompteRendu.Click += oLabelCompteRendu_Click;
                     oLabelCompteRendu.Text = "Oui";
                 }
@@ -249,7 +250,7 @@ namespace G_B
         private void oLabelCompteRendu_Click(object sender, EventArgs e)
         {
             //sender.LinkVisited = true;
-            System.Diagnostics.Process.Start("http://localhost/akagami/Github/PPE_finAnnee_BTS/PPE-examen_PHP/");
+            System.Diagnostics.Process.Start(link);
         }
 
         private void Dashboard_btnForm_Click(object sender, EventArgs e)
