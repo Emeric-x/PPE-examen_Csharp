@@ -27,7 +27,6 @@ namespace G_B
         private CligneFHFs oligneFHFs = CligneFHFs.getInstance();
         private List<Cvisiteur> oListVisiteurs = null;
         private CcompteRendus ocompterendus = CcompteRendus.getInstance();
-        private string link = "";
 
         public Fdashboard()
         {
@@ -221,12 +220,15 @@ namespace G_B
                 oLabelCompteRendu.Name = $"lblCompteRendu_{unVisiteur.Nom}";
                 oLabelCompteRendu.AutoSize = true;
                 oLabelCompteRendu.Font = new Font("Microsoft Sans Serif", 10);
-                link = $"http://localhost/akagami/Github/PPE_finAnnee_BTS/PPE-examen_PHP/download_compteRendu.php?loginChef={Fconnexion.oCurrentChefRegion.Login}&mdpChef={Fconnexion.oCurrentChefRegion.Mdp}&idVisit={unVisiteur.Id}";
+                string link = $"http://localhost/akagami/Github/PPE_finAnnee_BTS/PPE-examen_PHP/download_compteRendu.php?loginChef={Fconnexion.oCurrentChefRegion.Login}&mdpChef={Fconnexion.oCurrentChefRegion.Mdp}&idVisit={unVisiteur.Id}";
                 oLabelCompteRendu.Links.Add(0, link.Length, link);
                 if (ocompterendus.isCompteRenduDepose(unVisiteur.Id))
                 {
                     oLabelCompteRendu.LinkArea = new LinkArea(0, 3);
-                    oLabelCompteRendu.Click += oLabelCompteRendu_Click;
+                    oLabelCompteRendu.Click += (sender, EventArgs) =>
+                    {
+                        oLabelCompteRendu_Click(sender, EventArgs, link, ref oLabelCompteRendu); //override de l'event click (pour le linklabel)
+                    };
                     oLabelCompteRendu.Text = "Oui";
                 }
                 else
@@ -247,10 +249,10 @@ namespace G_B
             }
         }
 
-        private void oLabelCompteRendu_Click(object sender, EventArgs e)
+        private void oLabelCompteRendu_Click(object sender, EventArgs e, string sLink, ref LinkLabel soLabelCompteRendu)
         {
-            //sender.LinkVisited = true;
-            System.Diagnostics.Process.Start(link);
+            soLabelCompteRendu.LinkVisited = true;
+            System.Diagnostics.Process.Start(sLink);
         }
 
         private void Dashboard_btnForm_Click(object sender, EventArgs e)
